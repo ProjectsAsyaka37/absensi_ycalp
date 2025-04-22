@@ -1,7 +1,10 @@
 import 'package:absensi_ycalp/Authprovider/auth_provider.dart';
+import 'package:absensi_ycalp/page/screens/splash_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:absensi_ycalp/page/screens/signup_screen.dart';
+import 'package:absensi_ycalp/page/screens/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -114,7 +117,26 @@ class _LoginScreenState extends State<LoginScreen> {
                             ).showSnackBar(snackBar);
 
                             if (success) {
-                              // Navigasi ke halaman utama
+                              final user = authProvider.loginModel?.data?.user;
+                              final token =
+                                  authProvider.loginModel?.data?.token;
+
+                              if (user != null && token != null) {
+                                final prefs =
+                                    await SharedPreferences.getInstance();
+                                await prefs.setString('token', token);
+                                await prefs.setString(
+                                  'userName',
+                                  user.name ?? 'User',
+                                );
+
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const SplashHomeScreen(),
+                                  ),
+                                );
+                              }
                             }
                           },
                   child:

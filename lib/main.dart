@@ -1,5 +1,8 @@
+import 'package:absensi_ycalp/page/screens/home_screen.dart';
 import 'package:absensi_ycalp/page/screens/login_screen.dart';
 import 'package:absensi_ycalp/page/screens/signup_screen.dart';
+import 'package:absensi_ycalp/page/screens/splash_home_screen.dart';
+import 'beginning/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:absensi_ycalp/Authprovider/auth_provider.dart';
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/signup',
+      initialRoute: '/splashscreen',
       routes: {
         '/signup': (context) => const SignUpScreen(),
         '/login': (context) => const LoginScreen(),
@@ -47,7 +50,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const SignUpScreen(),
+      home: const SplashHomeScreen(),
     );
   }
 }
